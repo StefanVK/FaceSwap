@@ -43,7 +43,7 @@ jobs:
             if [ "$RUNNER_OS" == "Linux" ]; then
                 sudo apt-get install -y gperf libgl1-mesa-dev libglu1-mesa-dev x11-xserver-utils
             elif ["$RUNNER_OS" == "macOS"]; then
-                brew install -y aclocal  
+                brew install aclocal  
             fi
         shell: bash
 
