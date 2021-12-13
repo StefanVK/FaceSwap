@@ -1,0 +1,9 @@
+{
+  "name": "FaceSwap",
+  "version-string": "0.0.1",
+  "dependencies": [
+    "qt",
+    "nlohmann-json",
+    "opencv4"
+  ]
+}
