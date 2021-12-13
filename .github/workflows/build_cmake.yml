@@ -38,6 +38,12 @@ jobs:
             vcpkgCommitId: 'f9bcf2e6501d9037d1a9c40022f9784aa85f2055'
 
     steps:
+      - name: Install gperf
+        run: |
+        if: matrix.os == 'ubuntu-latest' then
+            sudo apt-get install -y gperf
+        shell: bash
+
       - uses: actions/checkout@v2
         with:
           submodules: true
