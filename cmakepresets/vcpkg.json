@@ -2,8 +2,11 @@
   "name": "faceswap",
   "version-string": "0.0.1",
   "dependencies": [
-    "qt",
     "nlohmann-json",
+    {
+      "name": "qtbase",
+      "features" :  ["widgets"]
+    },
     {
       "name": "opencv4",
       "features" : ["ipp", "png","jpeg","tbb","tiff"] 
