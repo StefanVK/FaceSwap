@@ -4,6 +4,6 @@
   "dependencies": [
     "qt",
     "nlohmann-json",
-    "opencv4"
+    "opencv4[ipp,png,jpeg,tbb,tiff]"
   ]
 }
