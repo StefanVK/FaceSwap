@@ -38,10 +38,10 @@ jobs:
             vcpkgCommitId: 'f9bcf2e6501d9037d1a9c40022f9784aa85f2055'
 
     steps:
-      - name: Install gperf
+      - name: Install gperf and gl
         run: |
             if [ "$RUNNER_OS" == "Linux" ]; then
-                sudo apt-get install -y gperf
+                sudo apt-get install -y gperf libgl1-mesa-dev libglu1-mesa-dev
             fi
         shell: bash
 
