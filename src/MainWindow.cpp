@@ -5,7 +5,6 @@
 
 #include <QFileDialog>
 #include <QMessageBox>
-#include <QTimer>
 
 #include <nlohmann/json.hpp>
 
