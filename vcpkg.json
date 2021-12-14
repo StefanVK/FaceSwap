@@ -4,7 +4,7 @@
   "dependencies": [
     "nlohmann-json",
     {
-      "name": "qtbase",
+      "name": "qt",
       "default-features": false,
       "features": [ "widgets", "gui", "jpeg", "png", "concurrent", "doubleconversion" ]
     },
