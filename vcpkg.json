@@ -5,7 +5,8 @@
     "nlohmann-json",
     {
       "name": "qtbase",
-      "features" :  ["widgets"]
+      "default-features": false,
+      "features": [ "widgets", "gui", "jpeg", "png", "concurrent" ]
     },
     {
       "name": "opencv4",
