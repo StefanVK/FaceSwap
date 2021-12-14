@@ -31,11 +31,11 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
         include:
           - os: windows-latest
-            vcpkgCommitId: 'f9bcf2e6501d9037d1a9c40022f9784aa85f2055'
+            vcpkgCommitId: '5568f110b509a9fd90711978a7cb76bae75bb092'
           - os: ubuntu-latest
-            vcpkgCommitId: 'f9bcf2e6501d9037d1a9c40022f9784aa85f2055'
+            vcpkgCommitId: '5568f110b509a9fd90711978a7cb76bae75bb092'
           - os: macos-latest
-            vcpkgCommitId: 'f9bcf2e6501d9037d1a9c40022f9784aa85f2055'
+            vcpkgCommitId: '5568f110b509a9fd90711978a7cb76bae75bb092'
 
     steps:
       - name: Install gperf and gl
