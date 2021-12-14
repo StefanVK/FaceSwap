@@ -4,9 +4,7 @@
   "dependencies": [
     "nlohmann-json",
     {
-      "name": "qt",
-      "default-features": false,
-      "features": [ "widgets", "gui", "jpeg", "png", "doubleconversion" ]
+      "name": "qt"
     },
     {
       "name": "opencv4",
