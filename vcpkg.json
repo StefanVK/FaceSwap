@@ -4,7 +4,7 @@
   "dependencies": [
     "nlohmann-json",
     {
-      "name": "qt"
+      "name": "qtbase"
     },
     {
       "name": "opencv4",
