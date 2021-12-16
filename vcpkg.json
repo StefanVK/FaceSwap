@@ -4,9 +4,6 @@
   "dependencies": [
     "nlohmann-json",
     {
-      "name": "qtbase"
-    },
-    {
       "name": "opencv4",
       "features" : ["ipp", "png","jpeg","tbb","tiff"] 
     }
