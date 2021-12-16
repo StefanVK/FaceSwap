@@ -38,18 +38,21 @@ jobs:
             vcpkgCommitId: '5ddd7f02689b7c5aab78711d77f61db5d2e5e79c'
 
     steps:
-      - name: Install gperf and gl
-        run: |
-            if [ "$RUNNER_OS" == "Linux" ]; then
-                sudo apt-get install -y gperf libgl1-mesa-dev libglu1-mesa-dev x11-xserver-utils libxft-dev libxrandr-dev libx11-dev libxi-dev libxcursor-dev libxdamage-dev libxinerama-dev libxkbcommon-dev libxkbcommon-x11-dev libxcb-xrm-dev libx11-xcb-dev libxext-dev libxfixes-dev libxrender-dev libxcb1-dev libxcb-glx0-dev libxcb-keysyms1-dev libxcb-image0-dev libxcb-shm0-dev libxcb-icccm4-dev libxcb-sync0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-randr0-dev libxcb-render-util0-dev 
-            elif [ "$RUNNER_OS" == "macOS" ]; then
-                brew install autoconf && brew install automake
-            fi
-        shell: bash
+      #- name: Install gperf and gl
+      #  run: |
+      #      if [ "$RUNNER_OS" == "Linux" ]; then
+      #          sudo apt-get install -y gperf libgl1-mesa-dev libglu1-mesa-dev x11-xserver-utils libxft-dev libxrandr-dev libx11-dev libxi-dev libxcursor-dev libxdamage-dev libxinerama-dev libxkbcommon-dev libxkbcommon-x11-dev libxcb-xrm-dev libx11-xcb-dev libxext-dev libxfixes-dev libxrender-dev libxcb1-dev libxcb-glx0-dev libxcb-keysyms1-dev libxcb-image0-dev libxcb-shm0-dev libxcb-icccm4-dev libxcb-sync0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-randr0-dev libxcb-render-util0-dev 
+      #      elif [ "$RUNNER_OS" == "macOS" ]; then
+      #          brew install autoconf && brew install automake
+      #      fi
+      #  shell: bash
 
       - uses: actions/checkout@v2
         with:
           submodules: true
+      
+      - name: Install Qt
+        uses: jurple/install-qt-action@v2
 
       - uses: lukka/get-cmake@latest
       - name: List $RUNNER_WORKSPACE before build
