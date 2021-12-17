@@ -52,6 +52,8 @@ jobs:
           submodules: true
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
+        with:
+            version: '6.2.2'
       - uses: lukka/get-cmake@latest
       - name: List $RUNNER_WORKSPACE before build
         run: find $RUNNER_WORKSPACE
