@@ -41,7 +41,9 @@ jobs:
             cc: "clang-12",
             cxx: "clang++12"
         }
-
+    env:
+        CC: ${{matrix.config.cc}}
+        CCX: ${{matrix.config.ccx}}
     steps:
       - name: Install necessary tools
         run: |
