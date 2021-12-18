@@ -39,7 +39,7 @@ jobs:
             name: "clang",
             os: ubuntu-latest,
             cc: "clang-12",
-            cxx: "clang++12"
+            cxx: "clang++-12"
         }
     env:
         CC: ${{matrix.config.cc}}
