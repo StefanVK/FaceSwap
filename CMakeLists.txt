@@ -12,7 +12,6 @@ if(DEFINED ENV{VCPKG_DEFAULT_TRIPLET} AND NOT DEFINED VCPKG_TARGET_TRIPLET)
   set(VCPKG_TARGET_TRIPLET "$ENV{VCPKG_DEFAULT_TRIPLET}" CACHE STRING "The vcpkg triplet")
 endif()
 
-
 cmake_minimum_required(VERSION 3.20)
 
 project(FaceMorph)
@@ -39,7 +38,7 @@ qt_add_executable(
 
 
 target_include_directories(FaceMorph PRIVATE ${Qt${QT_MAJOR_VERSION}_INCLUDE_DIRS})
-target_include_directories(FaceMorph PRIVATE ${CMAKE_SOURCE_DIR}/include)
+target_include_directories(FaceMorph PRIVATE ${CMAKE_SOURCE_DIR}/src)
 target_link_libraries(FaceMorph PRIVATE Qt::Widgets Qt::Core Qt::Gui ${OpenCV_LIBS})
 
 if(MSVC)
