@@ -18,7 +18,7 @@
 #   for you already! Look to (hosted-ninja-vcpkg_submod.yml)[./hosted-ninja-vcpkg_submod.yml] sample.
 #
 # - Finally, it runs CMake with CMakePreset.json and vcpkg's toolchain file to build the C++ sources with Ninja.
-name: hosted-ninja-vcpkg-install-autocache
+name: CI-Wíndows
 on: [push, workflow_dispatch]
 
 jobs:

@@ -18,7 +18,7 @@
 #   for you already! Look to (hosted-ninja-vcpkg_submod.yml)[./hosted-ninja-vcpkg_submod.yml] sample.
 #
 # - Finally, it runs CMake with CMakePreset.json and vcpkg's toolchain file to build the C++ sources with Ninja.
-name: hosted-ninja-vcpkg-install-autocache
+name: CI-Linux
 on: [push, workflow_dispatch]
 
 jobs:
@@ -28,10 +28,19 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest]
-        include:
-          - os: ubuntu-latest
-            vcpkgCommitId: '5ddd7f02689b7c5aab78711d77f61db5d2e5e79c'
+        config:
+        - {
+            name: "Linux g++",
+            os: ubuntu-latest,
+            cc: "gcc-10",
+            cxx: "g++-10"
+        }
+        - {
+            name: "Linux clang",
+            os: ubuntu-latest,
+            cc: "clang-12",
+            cxx: "clang++12"
+        }
 
     steps:
       - name: Install necessary tools
@@ -56,7 +65,7 @@ jobs:
         id: runvcpkg
         with:
           vcpkgDirectory: '${{ runner.workspace }}/b/vcpkg'
-          vcpkgGitCommitId: '${{ matrix.vcpkgCommitId }}'
+          vcpkgGitCommitId: '5ddd7f02689b7c5aab78711d77f61db5d2e5e79c'
           # Run vcpkg with the command specified by the `runVcpkgFormatString` input.
           runVcpkgInstall: true
           vcpkgJsonGlob: '**/vcpkg.json'
