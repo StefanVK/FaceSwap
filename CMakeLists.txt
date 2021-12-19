@@ -57,6 +57,7 @@ install(FILES ${qms} DESTINATION ${CMAKE_INSTALL_FULL_BINDIR} COMPONENT applicat
 # Set path to our custom CMAKE scripts
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake")
 
-# Include Qt deployment helper function
-include(windeployqt)
-windeployqt(FaceMorph)
+IF(WIN32)
+	include(windeployqt)
+	windeployqt(FaceMorph)
+ENDIF()
