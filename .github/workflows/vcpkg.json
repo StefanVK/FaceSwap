@@ -3,8 +3,6 @@
   "version-string": "0.0.1",
   "dependencies": [
     "nlohmann-json",
-    "qtbase",
-    "qttools",
     {
       "name": "opencv4",
       "features": [ "ipp", "png", "jpeg", "tbb", "tiff" ]
