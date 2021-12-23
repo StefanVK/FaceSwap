@@ -1,0 +1,72 @@
+# based on https://github.com/lukka/CppBuildTasks-Validation/blob/v10/.github/workflows/hosted-ninja-vcpkg-install.yml
+# Copyright (c) 2019-2020-2021 Luca Cappa
+# Released under the term specified in file LICENSE.txt
+# SPDX short identifier: MIT
+#
+# The peculiarity of this workflow is that runs `vcpkg install` at `run-vcpkg`, rather than with `run-camake.
+# Also, it does not assume that vcpkg is a submodule of this repository.
+#
+# This workflow does the following:
+# - Download and setup vcpkg (which is stored NOT in a Git submodule), then run `vcpkg install` to install the
+#   packages described in vcpkg.json manifest file.
+# - Note: at this point, all the vcpkg dependencies specified in vcpkg.json are installed, and it is possible to
+#   run anything that is needed to build the C++ application.
+#
+# - _Warning:_ in this sample, CMake is going to be used to build the application, but anything can be used. This
+#   means that vcpkg will be run again and it will quickly realize that all dependencies are already installed.
+#   In short: *it is not needed to run vcpkg* in the step before if you build with CMake, since CMake will run it
+#   for you already! Look to (hosted-ninja-vcpkg_submod.yml)[./hosted-ninja-vcpkg_submod.yml] sample.
+#
+# - Finally, it runs CMake with CMakePreset.json and vcpkg's toolchain file to build the C++ sources with Ninja.
+name: CI-Wíndows
+on: [push, workflow_dispatch]
+
+jobs:
+  job:
+    name: ${{ matrix.os }}-${{ github.workflow }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest]
+        include:
+          - os: windows-latest
+            vcpkgCommitId: '5ddd7f02689b7c5aab78711d77f61db5d2e5e79c'
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+            version: '6.2.2'
+      - uses: lukka/get-cmake@latest
+      - name: List $RUNNER_WORKSPACE before build
+        run: find $RUNNER_WORKSPACE
+        shell: bash
+
+      - name: Restore artifacts, or run vcpkg, build (and cache artifacts as post step)
+        uses: lukka/run-vcpkg@v10
+        id: runvcpkg
+        with:
+          vcpkgDirectory: '${{ runner.workspace }}/b/vcpkg'
+          vcpkgGitCommitId: '${{ matrix.vcpkgCommitId }}'
+          # Run vcpkg with the command specified by the `runVcpkgFormatString` input.
+          runVcpkgInstall: true
+          vcpkgJsonGlob: '**/vcpkg.json'
+          appendedCacheKey: vcpkginstall
+
+      - name: Prints output of run-vcpkg's action.
+        run: echo "root='${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}', triplet='${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_DEFAULT_TRIPLET_OUT }}' "
+
+      - name: Run CMake with Ninja
+        uses: lukka/run-cmake@v10
+        with:
+          cmakeListsTxtPath: '${{ github.workspace }}/CMakeLists.txt'
+          configurePreset: 'ninja-multi-vcpkg'
+          buildPreset: 'ninja-multi-vcpkg'
+
+      - name: List $RUNNER_WORKSPACE after build
+        run: find $RUNNER_WORKSPACE
+        shell: bash
