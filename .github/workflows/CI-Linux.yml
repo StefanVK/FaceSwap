@@ -71,7 +71,7 @@ jobs:
           # Run vcpkg with the command specified by the `runVcpkgFormatString` input.
           runVcpkgInstall: true
           vcpkgJsonGlob: '**/vcpkg.json'
-          appendedCacheKey: vcpkginstall, ${{matrix.config.name}}
+          appendedCacheKey: '${{matrix.config.name}}'
 
       - name: Prints output of run-vcpkg's action.
         run: echo "root='${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}', triplet='${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_DEFAULT_TRIPLET_OUT }}' "
