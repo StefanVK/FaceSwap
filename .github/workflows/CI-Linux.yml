@@ -70,7 +70,7 @@ jobs:
           vcpkgGitCommitId: '5ddd7f02689b7c5aab78711d77f61db5d2e5e79c'
           # Run vcpkg with the command specified by the `runVcpkgFormatString` input.
           runVcpkgInstall: true
-          vcpkgJsonGlob: '**/.github/workflows/vcpkg.json'
+          vcpkgJsonGlob: '**/vcpkg.json'
           appendedCacheKey: vcpkginstall
 
       - name: Prints output of run-vcpkg's action.
