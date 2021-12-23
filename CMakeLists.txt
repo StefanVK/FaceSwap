@@ -24,7 +24,7 @@ include_directories( ${OpenCV_INCLUDE_DIRS} )
 
 qt_add_executable(
 	FaceMorph
-	"src/AnnotatorWidget.cpp" "src/ImageWidget.cpp" "src/main.cpp" "src/MainWindow.cpp" "src/morph.cpp" "src/Morpher.cpp" "src/MainWindow.ui"
+	"src/AnnotatorWidget.cpp" "src/ImageWidget.cpp" "src/main.cpp" "src/MainWindow.cpp" "src/morph.cpp" "src/Morpher.cpp" "src/PointHandle.cpp" "src/MainWindow.ui"
 )
 
 

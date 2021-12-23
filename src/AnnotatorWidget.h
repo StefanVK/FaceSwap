@@ -8,6 +8,8 @@
 
 #include <filesystem>
 
+class PointHandle;
+
 class AnnotatorWidget : public ImageWidget
 {
   Q_OBJECT;
@@ -44,5 +46,5 @@ private:
   double m_Radius = 7.;
   bool m_Pressed = false, m_Dragging = false;
   QString m_ImageFilename;
-  std::map<int, QGraphicsEllipseItem*> m_Circles;
+  std::map<int, PointHandle*> m_Circles;
 };

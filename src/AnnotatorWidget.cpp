@@ -1,5 +1,7 @@
 #include "AnnotatorWidget.h"
 
+#include "PointHandle.h"
+
 #include <QGraphicsItem>
 #include <QImage>
 #include <QMouseEvent>
@@ -185,7 +187,8 @@ int AnnotatorWidget::createPoint(const QPointF& pt, int ID)
     while (m_Circles.contains(++ID))
       ;
   const int radius = 3;
-  auto circle = scene()->addEllipse(pt.x() - radius, pt.y() - radius, radius * 2, radius * 2);
+  auto circle = new PointHandle(pt);
+  scene()->addItem(circle);
   circle->setFlag(QGraphicsItem::ItemIsMovable);
   circle->setFlag(QGraphicsItem::ItemIsSelectable);
   circle->setData(0, ID);
