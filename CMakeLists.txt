@@ -14,8 +14,10 @@ endif()
 
 cmake_minimum_required(VERSION 3.20)
 
-project(FaceMorph)
+project(FaceMorph VERSION 0.1)
 include(cmake/StandardProjectSettings.cmake)
+
+
 set(QT_MAJOR_VERSION 6)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -36,18 +38,12 @@ qt_add_executable(
 	"src/AnnotatorWidget.cpp" "src/ImageWidget.cpp" "src/main.cpp" "src/MainWindow.cpp" "src/morph.cpp" "src/Morpher.cpp" "src/PointHandle.cpp" "src/MainWindow.ui"
 )
 
+include(cmake/CompilerWarnings.cmake)
+set_project_warnings(FaceMorph)
 
 target_include_directories(FaceMorph PRIVATE ${Qt${QT_MAJOR_VERSION}_INCLUDE_DIRS})
 target_include_directories(FaceMorph PRIVATE ${CMAKE_SOURCE_DIR}/src)
 target_link_libraries(FaceMorph PRIVATE Qt::Widgets Qt::Core Qt::Gui ${OpenCV_LIBS})
-
-if(MSVC)
-  #https://discourse.cmake.org/t/how-to-set-warning-level-correctly-in-modern-cmake/1103
-  #string(REGEX REPLACE "/W[1-3]" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
-  #target_compile_options(FaceMorph PRIVATE /W4 /WX)
-else()
-  #target_compile_options(FaceMorph PRIVATE -Wall -Wextra -Wpedantic)
-endif()
 
 
 install(TARGETS FaceMorph RUNTIME DESTINATION ${CMAKE_INSTALL_FULL_BINDIR} COMPONENT applications)
