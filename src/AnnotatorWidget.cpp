@@ -35,46 +35,7 @@ AnnotatorWidget::AnnotatorWidget(QWidget* parent) : ImageWidget(parent)
   setMouseTracking(true);
 }
 
-AnnotatorWidget::~AnnotatorWidget() {
-  for ([[maybe_unused]] auto& [ID, circle] : m_Circles)
-    delete circle;
-  m_Circles.clear(); 
-}
-
-void AnnotatorWidget::mousePressEvent(QMouseEvent* event)
-{
-  if (event->button() == Qt::LeftButton)
-    m_Pressed = true;
-
-  QGraphicsView::mousePressEvent(event);
-}
-
-void AnnotatorWidget::mouseMoveEvent(QMouseEvent* event)
-{
-  if (event->buttons() & Qt::LeftButton && m_Pressed)
-  {
-    m_Dragging = true;
-  }
-  QGraphicsView::mouseMoveEvent(event);
-}
-
-void AnnotatorWidget::mouseReleaseEvent(QMouseEvent* event)
-{
-  if (event->button() == Qt::LeftButton && m_Pressed)
-  {
-    m_Pressed = false;
-    if (m_Dragging)
-    {
-      m_Dragging = false;
-    }
-    else
-    {
-
-    }
-  }
-
-  QGraphicsView::mouseReleaseEvent(event);
-}
+AnnotatorWidget::~AnnotatorWidget() = default;
 
 void AnnotatorWidget::mouseDoubleClickEvent(QMouseEvent* event) {
   if (event->button() == Qt::LeftButton)
@@ -88,7 +49,6 @@ void AnnotatorWidget::mouseDoubleClickEvent(QMouseEvent* event) {
     }
   }
 }
-
 
 void AnnotatorWidget::keyPressEvent(QKeyEvent* event)
 {
