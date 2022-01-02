@@ -41,8 +41,8 @@ PointHandle::PointHandle(const QPointF& pt)
 void PointHandle::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
   // https://stackoverflow.com/questions/1222914/qgraphicsview-and-qgraphicsitem-don%C2%B4t-scale-item-when-scaling-the-view-rect
-  QTransform t = painter->transform();
-  qreal m11 = t.m11(), m22 = t.m22();
+  const QTransform t = painter->transform();
+  const qreal m11 = t.m11(), m22 = t.m22();
   painter->save(); 
   painter->setTransform(GenerateTranslationOnlyTransform(t, rect().center()));
   QGraphicsEllipseItem::paint(painter, option, widget);
