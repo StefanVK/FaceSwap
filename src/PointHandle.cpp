@@ -1,7 +1,9 @@
 #include "PointHandle.h"
 
 #include <QPainter>
-static QTransform GenerateTranslationOnlyTransform(const QTransform& original_transform, const QPointF& target_point)
+namespace
+{
+QTransform GenerateTranslationOnlyTransform(const QTransform& original_transform, const QPointF& target_point)
 {
   // https://www.generacodice.com/en/articolo/4511711/maintaining-relative-child-position-after-applying-qgraphicsitem-itemignorestransformations
   // To draw the unscaled icons, we desire a transform with scaling factors
@@ -21,26 +23,28 @@ static QTransform GenerateTranslationOnlyTransform(const QTransform& original_tr
   // Thus,
   // dx[new] = m11*x - x + m21*y + dx
   // dy[new] = m22*y - y + m12*x + dy
-  qreal dx = original_transform.m11() * target_point.x() - target_point.x() +
-             original_transform.m21() * target_point.y() + original_transform.m31();
-  qreal dy = original_transform.m22() * target_point.y() - target_point.y() +
-             original_transform.m12() * target_point.x() + original_transform.m32();
+  const qreal dx = original_transform.m11() * target_point.x() - target_point.x() +
+                   original_transform.m21() * target_point.y() + original_transform.m31();
+  const qreal dy = original_transform.m22() * target_point.y() - target_point.y() +
+                   original_transform.m12() * target_point.x() + original_transform.m32();
 
   return QTransform::fromTranslate(dx, dy);
 }
+} // namespace
 
 PointHandle::PointHandle(const QPointF& pt)
     : QGraphicsEllipseItem(pt.x() - m_Radius, pt.y() - m_Radius, m_Radius * 2, m_Radius * 2)
 {
 }
 
+// Overriden to paint the points at the same size regardless of scene scale
 void PointHandle::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
   // https://stackoverflow.com/questions/1222914/qgraphicsview-and-qgraphicsitem-don%C2%B4t-scale-item-when-scaling-the-view-rect
   QTransform t = painter->transform();
   qreal m11 = t.m11(), m22 = t.m22();
-  painter->save(); // save painter state
+  painter->save(); 
   painter->setTransform(GenerateTranslationOnlyTransform(t, rect().center()));
   QGraphicsEllipseItem::paint(painter, option, widget);
-  painter->restore();                          // restore painter state
+  painter->restore();
 }
