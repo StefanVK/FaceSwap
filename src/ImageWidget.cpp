@@ -23,12 +23,12 @@ ImageWidget::ImageWidget(QWidget* parent) : QGraphicsView(parent)
   setMouseTracking(true);
 }
 
-void ImageWidget::setImage(cv::Mat image)
+void ImageWidget::setImage(const cv::Mat& image)
 {
   if (image.empty())
     return;
   m_Mat = image.clone();
-  m_Image = QImage(m_Mat.data, m_Mat.cols, m_Mat.rows, m_Mat.step, QImage::Format::Format_RGB888).rgbSwapped();
+  m_Image = QImage(m_Mat.data, m_Mat.cols, m_Mat.rows, m_Mat.step, QImage::Format::Format_BGR888);
   m_Image.detach();
   setSceneRect(0, 0, m_Mat.cols, m_Mat.rows);
   scene()->update(sceneRect());

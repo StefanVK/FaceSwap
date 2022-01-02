@@ -10,7 +10,7 @@ class ImageWidget : public QGraphicsView
 
 public:
   ImageWidget(QWidget* parent = nullptr);
-  void setImage(cv::Mat image);
+  void setImage(const cv::Mat& image);
   const cv::Mat& getImage() const { return m_Mat; }
   double getZoom() const { return m_Zoom; }
 signals:
